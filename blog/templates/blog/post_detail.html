@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+        <div class="media-body">
+            <div class="d-flex justify-content-between article-metadata">
+                <div>
+                    <a class="mr-2" href="#">{{ post.author.first_name }} {{ post.author.last_name }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:'F d, Y' }}</small>
+                </div>
+                {% if post.author == user %}
+                    <div>
+                        <!-- <a class="btn btn-outline-info btn-sm" href="{% url 'update-post' post.id post.slug %}">Update</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-post' post.id post.slug %}">Delete</a> -->
+                        <div class="dropdown pb-2">
+                            <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    id="dropdownMenuButton" 
+                                    data-toggle="dropdown" 
+                                    aria-haspopup="true" 
+                                    aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                    Update
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" style=" color: #dc3545" href="#">
+                                    <i class="bi bi-trash"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>  
+                {% endif %}
+            </div>      
+            <h2>{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }} </p>
+        </div>
+    </article>
+    {% if post.author == user %}
+        <div class="content-section">
+            <div class="text-center">
+                <a class="btn btn-outline-info btn-sm mt-1" href="{% url 'update-post' post.id post.slug %}">Update</a>
+                <a class="btn btn-outline-danger btn-sm mt-1" href="{% url 'delete-post' post.id post.slug %}">Delete</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
