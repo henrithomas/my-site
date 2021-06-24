@@ -18,4 +18,6 @@ urlpatterns = [
     path('post/<int:pk>/<slug:slug>/delete/', PostDeleteView.as_view(), name='delete-post'),
     path('posts/<str:month>/', PostsMonthView.as_view(), name='month-post'),
     path('about/', views.about, name='blog-about'),
+    path('photography/', views.photography, name='blog-photos'),
+    path('projects/', views.projects, name='blog-projects'),
 ]
